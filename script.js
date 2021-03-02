@@ -17,6 +17,7 @@ const controlBar = {
 
 // projectiles
 
+
 // defenders
 
 // enemies
@@ -26,7 +27,7 @@ const controlBar = {
 // utilities
 function animate() {
   ctx.fillStyle = 'blue';
-  fillRect(0, 0, controlBar.width, controlBar.height);
+  ctx.fillRect(0, 0, controlBar.width, controlBar.height);
   requestAnimationFrame(animate);
 }
 animate();
