@@ -10,6 +10,10 @@ const cellGap = 3;
 const gameGrid = [];
 
 // game board
+const controlBar = {
+  width: canvas.width,
+  height: cellSize,
+}
 
 // projectiles
 
@@ -20,3 +24,9 @@ const gameGrid = [];
 // resources
 
 // utilities
+function animate() {
+  ctx.fillStyle = 'blue';
+  fillRect(0, 0, controlBar.width, controlBar.height);
+  requestAnimationFrame(animate);
+}
+animate();
