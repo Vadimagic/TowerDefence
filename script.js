@@ -78,3 +78,11 @@ function animate() {
 }
 createGrid()
 animate();
+
+function collision(first, second) {
+  if (!(first.x > second.x + second.width) ||
+      !(second.x > first.x + first.width) ||
+      !(first.y > second.y + second.height) ||
+      !(second.y > first.y + first.height)
+  )
+}
