@@ -36,6 +36,12 @@ function createGrid() {
   }
 }
 
+function handleGameGrid() {
+  for (let i = 0; i < gameGrid.length; i++) {
+    gameGrid[i].draw();
+  }
+}
+
 // projectiles
 
 
@@ -49,6 +55,8 @@ function createGrid() {
 function animate() {
   ctx.fillStyle = 'blue';
   ctx.fillRect(0, 0, controlBar.width, controlBar.height);
+  handleGameGrid()
   requestAnimationFrame(animate);
 }
+createGrid()
 animate();
