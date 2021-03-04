@@ -9,7 +9,7 @@ const cellSize = 100;
 const cellGap = 3;
 const gameGrid = [];
 const defenders = [];
-let defenderCost = 100;
+let numberOfResources = 300;
 
 // mouse
 const mouse = {
@@ -84,9 +84,28 @@ class Defender {
     ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = 'black';
     ctx.font = '20px Arial';
-    ctx.fillText(Math.floor(this.health), this.x, this.y);
+    ctx.fillText(Math.floor(this.health), this.x + 5, this.y + 25);
   }
 }
+
+canvas.addEventListener('click', () => {
+  const gridPositionX = mouse.x - mouse.x % cellSize;
+  const gridPositionY = mouse.y - mouse.y % cellSize;
+  if (gridPositionY < cellSize) return;
+  let defenderCost = 100;
+  if (numberOfResources >= defenderCost) {
+    defenders.push(new Defender(gridPositionX, gridPositionY));
+    numberOfResources -= defenderCost;
+  }
+});
+
+
+function handleDefenders() {
+  for (let i = 0; i < defenders.length; i++) {
+    defenders[i].draw();
+  }
+}
+
 
 // enemies
 
@@ -97,7 +116,8 @@ function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'blue';
   ctx.fillRect(0, 0, controlBar.width, controlBar.height);
-  handleGameGrid()
+  handleGameGrid();
+  handleDefenders();
   requestAnimationFrame(animate);
 }
 createGrid()
