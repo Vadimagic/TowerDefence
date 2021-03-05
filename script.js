@@ -10,6 +10,7 @@ const cellGap = 3;
 const gameGrid = [];
 const defenders = [];
 let numberOfResources = 300;
+const enemies = [];
 
 // mouse
 const mouse = {
@@ -134,6 +135,13 @@ class Emeny {
   }
 }
 
+function handleEnemies() {
+  for (let i = 0; i < enemies.length; i++) {
+    enemies[i].update();
+    enemies[i].draw();
+  }
+}
+
 
 // resources
 
@@ -151,6 +159,7 @@ function animate() {
   handleGameGrid();
   handleDefenders();
   handleGameStatus();
+  handleEnemies();
   requestAnimationFrame(animate);
 }
 createGrid()
