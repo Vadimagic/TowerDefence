@@ -11,6 +11,8 @@ const gameGrid = [];
 const defenders = [];
 let numberOfResources = 300;
 const enemies = [];
+const enemyPositions = [];
+let frame = 0;
 
 // mouse
 const mouse = {
@@ -128,7 +130,7 @@ class Emeny {
   }
   draw() {
     ctx.fillStyle = 'red';
-    ctx.fillRect(this.x, this.y, this.width. this.height);
+    ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = 'black';
     ctx.font = '20px Arial';
     ctx.fillText(Math.floor(this.health), this.x + 5, this.y + 25);
@@ -139,6 +141,11 @@ function handleEnemies() {
   for (let i = 0; i < enemies.length; i++) {
     enemies[i].update();
     enemies[i].draw();
+  }
+  if (frame % 100 === 0) {
+    let verticalPosition = Math.floor(Math.random * 5 + 1) * cellSize;
+    enemies.push(new Emeny(verticalPosition));
+    enemyPositions.push(verticalPosition);
   }
 }
 
@@ -160,6 +167,7 @@ function animate() {
   handleDefenders();
   handleGameStatus();
   handleEnemies();
+  frame++;
   requestAnimationFrame(animate);
 }
 createGrid()
