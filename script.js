@@ -165,8 +165,8 @@ function animate() {
   ctx.fillRect(0, 0, controlBar.width, controlBar.height);
   handleGameGrid();
   handleDefenders();
-  handleGameStatus();
   handleEnemies();
+  handleGameStatus();
   frame++;
   requestAnimationFrame(animate);
 }
