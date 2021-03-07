@@ -163,6 +163,11 @@ function handleGameStatus() {
   ctx.fillStyle = 'gold';
   ctx.font = '30px Arial';
   ctx.fillText('Resources: ' + numberOfResources, 10, 50);
+  if (gameOver) {
+    ctx.fillStyle = 'black';
+    ctx.font = '60px Arial';
+    ctx.fillText('GAME OVER', 135, 330);
+  }
 }
 
 function animate() {
