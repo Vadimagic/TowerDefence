@@ -12,6 +12,7 @@ const defenders = [];
 let numberOfResources = 300;
 const enemies = [];
 const enemyPositions = [];
+let enemiesInterval = 600;
 let frame = 0;
 
 // mouse
@@ -142,10 +143,11 @@ function handleEnemies() {
     enemies[i].update();
     enemies[i].draw();
   }
-  if (frame % 100 === 0) {
+  if (frame % enemiesInterval === 0) {
     let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize;
     enemies.push(new Emeny(verticalPosition));
     enemyPositions.push(verticalPosition);
+    if (enemiesInterval > 120) enemiesInterval -= 50
   }
 }
 
