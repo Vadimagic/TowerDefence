@@ -14,6 +14,7 @@ const enemies = [];
 const enemyPositions = [];
 let enemiesInterval = 600;
 let frame = 0;
+let gameOver = false; 
 
 // mouse
 const mouse = {
@@ -142,6 +143,9 @@ function handleEnemies() {
   for (let i = 0; i < enemies.length; i++) {
     enemies[i].update();
     enemies[i].draw();
+    if (enemies[i].x < 0) {
+      gameOver = true;
+    }
   }
   if (frame % enemiesInterval === 0) {
     let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize;
@@ -170,7 +174,7 @@ function animate() {
   handleEnemies();
   handleGameStatus();
   frame++;
-  requestAnimationFrame(animate);
+  if (!gameOver) requestAnimationFrame(animate);
 }
 createGrid()
 animate();
