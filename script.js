@@ -116,7 +116,7 @@ function handleDefenders() {
         enemies[j].movement = 0;
         defenders[i].health -= .2;
       }
-      if (defenders[i].health <= 0) {
+      if (defenders[i] && defenders[i].health <= 0) {
         defenders.splice(i, 1);
         i--;
       }
