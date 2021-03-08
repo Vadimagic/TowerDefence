@@ -88,7 +88,7 @@ class Defender {
     ctx.fillStyle = 'gold';
     ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = 'black';
-    ctx.font = '20px Arial';
+    ctx.font = '20px Orbitron';
     ctx.fillText(Math.floor(this.health), this.x + 5, this.y + 25);
   }
 }
@@ -134,7 +134,7 @@ class Emeny {
     ctx.fillStyle = 'red';
     ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = 'black';
-    ctx.font = '20px Arial';
+    ctx.font = '20px Orbitron';
     ctx.fillText(Math.floor(this.health), this.x + 5, this.y + 25);
   }
 }
@@ -161,11 +161,11 @@ function handleEnemies() {
 // utilities
 function handleGameStatus() {
   ctx.fillStyle = 'gold';
-  ctx.font = '30px Arial';
+  ctx.font = '30px Orbitron';
   ctx.fillText('Resources: ' + numberOfResources, 10, 50);
   if (gameOver) {
     ctx.fillStyle = 'black';
-    ctx.font = '60px Arial';
+    ctx.font = '60px Orbitron';
     ctx.fillText('GAME OVER', 135, 330);
   }
 }
