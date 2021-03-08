@@ -111,6 +111,16 @@ canvas.addEventListener('click', () => {
 function handleDefenders() {
   for (let i = 0; i < defenders.length; i++) {
     defenders[i].draw();
+    for (let j = 0; j < enemies.length; j++) {
+      if (collision(defenders[i], enemies[j])) {
+        enemies[j].movement = 0;
+        defenders[i].health -= .2;
+      }
+      if (defenders[i].health <= 0) {
+        defenders.splice(i, 1);
+        i--;
+      }
+    }
   }
 }
 
