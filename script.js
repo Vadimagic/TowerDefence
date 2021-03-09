@@ -7,14 +7,17 @@ canvas.height = 600;
 // global variables
 const cellSize = 100;
 const cellGap = 3;
-const gameGrid = [];
-const defenders = [];
+
 let numberOfResources = 300;
-const enemies = [];
-const enemyPositions = [];
 let enemiesInterval = 600;
 let frame = 0;
-let gameOver = false; 
+let gameOver = false;
+
+const gameGrid = [];
+const defenders = [];
+const enemies = [];
+const enemyPositions = [];
+const projectiles = [];
 
 // mouse
 const mouse = {
@@ -71,6 +74,25 @@ function handleGameGrid() {
 
 // projectiles
 
+class Projectile {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = 10;
+    this.height = 10;
+    this.power = 20;
+    this.speed = 5;
+  }
+  update() {
+    this.x += this.speed;
+  }
+  draw() {
+    ctx.fillStyle = 'blue';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
 
 // defenders
 class Defender {
