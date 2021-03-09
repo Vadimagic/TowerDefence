@@ -125,6 +125,12 @@ class Defender {
     ctx.font = '20px Orbitron';
     ctx.fillText(Math.floor(this.health), this.x + 5, this.y + 25);
   }
+  update() {
+    this.timer++;
+    if (this.timer % 100 === 0) {
+      projectiles.push(new Projectile(this.x + cellSize, this.y + cellSize / 2))
+    }
+  }
 }
 
 canvas.addEventListener('click', () => {
@@ -145,6 +151,7 @@ canvas.addEventListener('click', () => {
 function handleDefenders() {
   for (let i = 0; i < defenders.length; i++) {
     defenders[i].draw();
+    defenders[i].update();
     for (let j = 0; j < enemies.length; j++) {
       if (collision(defenders[i], enemies[j])) {
         enemies[j].movement = 0;
@@ -223,6 +230,7 @@ function animate() {
   handleDefenders();
   handleEnemies();
   handleGameStatus();
+  handleProjectiles();
   frame++;
   if (!gameOver) requestAnimationFrame(animate);
 }
