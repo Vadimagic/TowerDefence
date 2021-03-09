@@ -94,6 +94,18 @@ class Projectile {
   }
 }
 
+function handleProjectiles() {
+  for (let i = 0; i < projectiles.length; i++) {
+    projectiles[i].update();
+    projectiles[i].draw();
+
+    if (projectiles[i] && projectiles[i].x > canvas.width - cellSize) {
+      projectiles.splice(i, 1);
+      i--;
+    }
+  }
+}
+
 // defenders
 class Defender {
   constructor(x, y) {
