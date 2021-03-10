@@ -206,6 +206,11 @@ function handleEnemies() {
     if (enemies[i].x < 0) {
       gameOver = true;
     }
+    if (enemies[i].health <= 0) {
+      numberOfResources += enemies[i].maxHealth / 2;
+      enemies.splice(i, 1);
+      i--;
+    }
   }
   if (frame % enemiesInterval === 0) {
     let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize;
