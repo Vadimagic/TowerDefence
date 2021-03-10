@@ -12,6 +12,7 @@ let numberOfResources = 300;
 let enemiesInterval = 600;
 let frame = 0;
 let gameOver = false;
+let score = 0;
 
 const gameGrid = [];
 const defenders = [];
@@ -207,7 +208,9 @@ function handleEnemies() {
       gameOver = true;
     }
     if (enemies[i].health <= 0) {
-      numberOfResources += enemies[i].maxHealth / 2;
+      const gainedResources = enemies[i].maxHealth / 2;
+      numberOfResources += gainedResources;
+      score += gainedResources;
       enemies.splice(i, 1);
       i--;
     }
