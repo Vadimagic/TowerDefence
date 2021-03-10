@@ -99,6 +99,14 @@ function handleProjectiles() {
     projectiles[i].update();
     projectiles[i].draw();
 
+    for (let j = 0; j < enemies.length; j++) {
+      if (enemies[j] && projectiles[i] && collision(projectiles[i], enemies[j])) {
+        enemies[j].health -= projectiles[i].power;
+        projectiles.splice(i, 1);
+        i--;
+      }
+    }
+
     if (projectiles[i] && projectiles[i].x > canvas.width - cellSize) {
       projectiles.splice(i, 1);
       i--;
@@ -153,7 +161,7 @@ function handleDefenders() {
     defenders[i].draw();
     defenders[i].update();
     for (let j = 0; j < enemies.length; j++) {
-      if (collision(defenders[i], enemies[j])) {
+      if (defenders[i] && collision(defenders[i], enemies[j])) {
         enemies[j].movement = 0;
         defenders[i].health -= .2;
       }
