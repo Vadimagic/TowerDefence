@@ -135,9 +135,13 @@ class Defender {
     ctx.fillText(Math.floor(this.health), this.x + 5, this.y + 25);
   }
   update() {
-    this.timer++;
-    if (this.timer % 100 === 0) {
-      projectiles.push(new Projectile(this.x + cellSize, this.y + cellSize / 2))
+    if (this.shooting) {
+      this.timer++;
+      if (this.timer % 100 === 0) {
+        projectiles.push(new Projectile(this.x + cellSize, this.y + cellSize / 2))
+      }
+    } else {
+      this.timer = 0;
     }
   }
 }
