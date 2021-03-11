@@ -236,7 +236,8 @@ function handleEnemies() {
 function handleGameStatus() {
   ctx.fillStyle = 'gold';
   ctx.font = '30px Orbitron';
-  ctx.fillText('Resources: ' + numberOfResources, 10, 50);
+  ctx.fillText('Score: ' + score, 10, 40);
+  ctx.fillText('Resources: ' + numberOfResources, 10, 80);
   if (gameOver) {
     ctx.fillStyle = 'black';
     ctx.font = '60px Orbitron';
