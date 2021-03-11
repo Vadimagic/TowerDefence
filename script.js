@@ -122,7 +122,7 @@ class Defender {
     this.y = y;
     this.width = cellSize;
     this.height = cellSize;
-    this.shooting = false;
+    this.shooting = true;
     this.health = 100;
     this.projectiles = [];
     this.timer = 0;
@@ -215,6 +215,8 @@ function handleEnemies() {
       const gainedResources = enemies[i].maxHealth / 2;
       numberOfResources += gainedResources;
       score += gainedResources;
+      const findThisIndex = enemyPositions.indexOf(enemies[i].y)
+      enemyPositions.splice(findThisIndex, 1);
       enemies.splice(i, 1);
       i--;
     }
