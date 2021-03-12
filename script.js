@@ -14,11 +14,14 @@ let frame = 0;
 let gameOver = false;
 let score = 0;
 
+const winningScore = 3000;
+
 const gameGrid = [];
 const defenders = [];
 const enemies = [];
 const enemyPositions = [];
 const projectiles = [];
+const resources = [];
 
 // mouse
 const mouse = {
@@ -165,7 +168,7 @@ function handleDefenders() {
   for (let i = 0; i < defenders.length; i++) {
     defenders[i].draw();
     defenders[i].update();
-    if (enemyPositions.indexOf(defenders[i].y) !== -1) {
+    if (enemyPositions.indexOf(defenders[i].y - cellGap) !== -1) {
       defenders[i].shooting = true;
     } else {
       defenders[i].shooting = false;
@@ -217,7 +220,7 @@ function handleEnemies() {
       gameOver = true;
     }
     if (enemies[i].health <= 0) {
-      const gainedResources = enemies[i].maxHealth / 2;
+      const gainedResources = enemies[i].maxHealth / 5;
       numberOfResources += gainedResources;
       score += gainedResources;
       const findThisIndex = enemyPositions.indexOf(enemies[i].y)
@@ -239,13 +242,13 @@ function handleEnemies() {
 
 const amounts = [20, 30, 40];
 
-class Resources {
+class Resource {
   constructor() {
     this.x = Math.random() * (canvas.width - cellSize);
-    this.y = (Math.floor(Math.random() * 5) + 1) * cellSize + 25;
+    this.y = Math.floor(Math.random() * 5 + 1) * cellSize + 25;
     this.width = cellSize * .6;
     this.height = cellSize * .6;
-    this.amount = amounts[Math.floor(Math.random * amounts.length)];
+    this.amount = amounts[Math.floor(Math.random() * amounts.length)];
   }
   draw() {
     ctx.fillStyle = 'yellow';
@@ -253,6 +256,20 @@ class Resources {
     ctx.fillStyle = 'black';
     ctx.font = '20px Orbitron';
     ctx.fillText(this.amount, this.x + 15, this.y + 25);
+  }
+}
+
+function handleResources() {
+  if (!(frame % 500) && frame !== 0 && score < winningScore) {
+    resources.push(new Resource())
+  }
+  for (let i = 0; i < resources.length; i++) {4
+    resources[i].draw();
+    if (resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
+      numberOfResources += resources[i].amount;
+      resources.splice(i, 1);
+      i--;
+    }
   }
 }
 
@@ -276,6 +293,7 @@ function animate() {
   handleGameGrid();
   handleDefenders();
   handleEnemies();
+  handleResources();
   handleGameStatus();
   handleProjectiles();
   frame++;
