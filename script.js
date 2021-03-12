@@ -14,7 +14,7 @@ let frame = 0;
 let gameOver = false;
 let score = 0;
 
-const winningScore = 3000;
+const winningScore = 60;
 
 const gameGrid = [];
 const defenders = [];
@@ -229,7 +229,7 @@ function handleEnemies() {
       i--;
     }
   }
-  if (frame % enemiesInterval === 0) {
+  if (frame % enemiesInterval === 0 && score < winningScore) {
     let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize + cellGap;
     enemies.push(new Emeny(verticalPosition));
     enemyPositions.push(verticalPosition);
@@ -283,6 +283,13 @@ function handleGameStatus() {
     ctx.fillStyle = 'black';
     ctx.font = '60px Orbitron';
     ctx.fillText('GAME OVER', 135, 330);
+  }
+  if (score >= winningScore && enemies.length === 0) {
+    ctx.fillStyle = 'black';
+    ctx.font = '50px Orbitron';
+    ctx.fillText('LEVEL COMPLETE', 130, 300);
+    ctx.font = '30px Orbitron';
+    ctx.fillText('You win with ' + score + ' points', 134, 340);
   }
 }
 
