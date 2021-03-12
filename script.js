@@ -108,7 +108,7 @@ function handleProjectiles() {
       }
     }
 
-    if (projectiles[i] && projectiles[i].x > canvas.width - cellSize) {
+    if (projectiles[i] && projectiles[i].x > canvas.width) {
       projectiles.splice(i, 1);
       i--;
     }
@@ -122,7 +122,7 @@ class Defender {
     this.y = y;
     this.width = cellSize;
     this.height = cellSize;
-    this.shooting = true;
+    this.shooting = false;
     this.health = 100;
     this.projectiles = [];
     this.timer = 0;
@@ -165,6 +165,11 @@ function handleDefenders() {
   for (let i = 0; i < defenders.length; i++) {
     defenders[i].draw();
     defenders[i].update();
+    if (enemyPositions.indexOf(defenders[i].y) !== -1) {
+      defenders[i].shooting = true;
+    } else {
+      defenders[i].shooting = false;
+    }
     for (let j = 0; j < enemies.length; j++) {
       if (defenders[i] && collision(defenders[i], enemies[j])) {
         enemies[j].movement = 0;
