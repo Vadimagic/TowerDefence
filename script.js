@@ -237,6 +237,25 @@ function handleEnemies() {
 
 // resources
 
+const amounts = [20, 30, 40];
+
+class Resources {
+  constructor() {
+    this.x = Math.random() * (canvas.width - cellSize);
+    this.y = (Math.floor(Math.random() * 5) + 1) * cellSize + 25;
+    this.width = cellSize * .6;
+    this.height = cellSize * .6;
+    this.amount = amounts[Math.floor(Math.random * amounts.length)];
+  }
+  draw() {
+    ctx.fillStyle = 'yellow';
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.fillStyle = 'black';
+    ctx.font = '20px Orbitron';
+    ctx.fillText(this.amount, this.x + 15, this.y + 25);
+  }
+}
+
 // utilities
 function handleGameStatus() {
   ctx.fillStyle = 'gold';
