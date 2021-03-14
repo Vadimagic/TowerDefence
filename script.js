@@ -171,7 +171,7 @@ function handleDefenders() {
     if (enemyPositions.indexOf(defenders[i].y) !== -1) {
       defenders[i].shooting = true;
     } else {
-      defenders[i].shooting = false;
+      defenders[i].shooting = false; 
     }
     for (let j = 0; j < enemies.length; j++) {
       if (defenders[i] && collision(defenders[i], enemies[j])) {
