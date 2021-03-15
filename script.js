@@ -149,21 +149,6 @@ class Defender {
   }
 }
 
-canvas.addEventListener('click', () => {
-  const gridPositionX = mouse.x - mouse.x % cellSize + cellGap;
-  const gridPositionY = mouse.y - mouse.y % cellSize + cellGap;
-  if (gridPositionY < cellSize) return;
-  for (let i = 0; i < defenders.length; i++) {
-    if (defenders[i].x === gridPositionX && defenders[i].y === gridPositionY) return;
-  }
-  let defenderCost = 100;
-  if (numberOfResources >= defenderCost) {
-    defenders.push(new Defender(gridPositionX, gridPositionY));
-    numberOfResources -= defenderCost;
-  }
-});
-
-
 function handleDefenders() {
   for (let i = 0; i < defenders.length; i++) {
     defenders[i].draw();
