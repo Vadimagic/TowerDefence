@@ -190,7 +190,7 @@ function handleDefenders() {
 // floating messages
 const floatingMessages = [];
 class floatingMessage {
-  constructor(value, x, y, color) {
+  constructor(value, x, y, size, color) {
     this.value = value;
     this.x = x;
     this.y = y;
@@ -329,6 +329,22 @@ function handleGameStatus() {
   }
 }
 
+canvas.addEventListener('click', () => {
+  const gridPositionX = mouse.x - mouse.x % cellSize + cellGap;
+  const gridPositionY = mouse.y - mouse.y % cellSize + cellGap;
+  if (gridPositionY < cellSize) return;
+  for (let i = 0; i < defenders.length; i++) {
+    if (defenders[i].x === gridPositionX && defenders[i].y === gridPositionY) return;
+  }
+  let defenderCost = 100;
+  if (numberOfResources >= defenderCost) {
+    defenders.push(new Defender(gridPositionX, gridPositionY));
+    numberOfResources -= defenderCost;
+  } else {
+    floatingMessages.push(new floatingMessage('need more resources', mouse.x, mouse.y, 15, 'blue'));
+  }
+});
+
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'blue';
@@ -339,6 +355,7 @@ function animate() {
   handleResources();
   handleGameStatus();
   handleProjectiles();
+  handleFloatingMessage();
   frame++;
   if (!gameOver) requestAnimationFrame(animate);
 }
