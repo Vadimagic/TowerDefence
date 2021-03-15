@@ -288,6 +288,7 @@ function handleResources() {
     resources[i].draw();
     if (resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
       numberOfResources += resources[i].amount;
+      floatingMessages.push(new floatingMessage('+' + resources[i].amount, resources[i].x, resources[i].y, 20, 'gold'));
       resources.splice(i, 1);
       i--;
     }
@@ -326,7 +327,7 @@ canvas.addEventListener('click', () => {
     defenders.push(new Defender(gridPositionX, gridPositionY));
     numberOfResources -= defenderCost;
   } else {
-    floatingMessages.push(new floatingMessage('need more resources', mouse.x, mouse.y, 15, 'blue'));
+    floatingMessages.push(new floatingMessage('need more resources', mouse.x, mouse.y, 20, 'blue'));
   }
 });
 
