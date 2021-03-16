@@ -242,6 +242,7 @@ function handleEnemies() {
     }
     if (enemies[i].health <= 0) {
       const gainedResources = enemies[i].maxHealth / 5;
+      floatingMessages.push(new floatingMessage('+' + gainedResources, enemies[i].x, enemies[i].y, 30, 'gold'));
       numberOfResources += gainedResources;
       score += gainedResources;
       const findThisIndex = enemyPositions.indexOf(enemies[i].y)
@@ -288,7 +289,7 @@ function handleResources() {
     resources[i].draw();
     if (resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
       numberOfResources += resources[i].amount;
-      floatingMessages.push(new floatingMessage('+' + resources[i].amount, resources[i].x, resources[i].y, 20, 'gold'));
+      floatingMessages.push(new floatingMessage('+' + resources[i].amount, resources[i].x, resources[i].y, 30, 'gold'));
       resources.splice(i, 1);
       i--;
     }
