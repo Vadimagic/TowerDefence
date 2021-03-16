@@ -210,7 +210,7 @@ function handleFloatingMessage() {
 }
 
 // enemies
-class Emeny {
+class Enemy {
   constructor(verticalPosition) {
     this.x = canvas.width;
     this.y = verticalPosition;
@@ -252,7 +252,7 @@ function handleEnemies() {
   }
   if (frame % enemiesInterval === 0 && score < winningScore) {
     let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize + cellGap;
-    enemies.push(new Emeny(verticalPosition));
+    enemies.push(new Enemy(verticalPosition));
     enemyPositions.push(verticalPosition);
     if (enemiesInterval > 120) enemiesInterval -= 50
   }
